@@ -27,7 +27,7 @@ module Arke::Exchange
     # * creates +order+ via RestApi
     def create_order(order)
       response = post(
-        'peatio/market/orders',
+        'orders',
         {
           market: order.market.downcase,
           side:   order.side.to_s,
@@ -44,7 +44,10 @@ module Arke::Exchange
     # * cancels +order+ via RestApi
     def stop_order(id)
       response = post(
-        "peatio/market/orders/#{id}/cancel"
+        'order/delete',
+        {
+          id: id
+        }
       )
       @open_orders.remove_order(id)
 
@@ -69,8 +72,13 @@ module Arke::Exchange
 
     # Helper method, generates headers to authenticate with +api_key+
     def generate_headers
+      unless ENV['API_BEARER_KEY'] then
+        p "You have to specify, export API_BEARER_KEY='xxxx'."
+      end
+      api_key_header = 'Bearer ' + ENV['API_BEARER_KEY']
       nonce = Time.now.to_i.to_s
       {
+        'Authorization' => api_key_header,
         'X-Auth-Apikey' => @api_key,
         'X-Auth-Nonce' => nonce,
         'X-Auth-Signature' => OpenSSL::HMAC.hexdigest('SHA256', @secret, nonce + @api_key),

@@ -3,26 +3,26 @@ strategy:
   volume_ratio: 0.1
   target:
     driver: rubykube
-    market: 'FTHUSD'
-    host: "http://www.devkube.com"
+    market: 'BTCUSD'
+    host: "http://api.wb.local"
     key: ""
     secret: ""
     rate_limit: 1
   sources:
-    - driver: bitfaker
-      market: 'tETHUSD'
-      host: "api.bitfinex.com"
-      key: ""
-      secret: ""
-      rate_limit: 0.2
-    - driver: bitfinex
-      market: 'tETHUSD'
-      host: "api.bitfinex.com"
-      key: ""
-      secret: ""
-      rate_limit: 0.2
+#    - driver: bitfaker
+#      market: 'BTCUSDT'
+#      host: "api.bitfinex.com"
+#      key: ""
+#      secret: ""
+#      rate_limit: 0.2
+#    - driver: bitfinex
+#      market: 'BTCUSDT'
+#      host: "api.bitfinex.com"
+#      key: ""
+#      secret: ""
+#      rate_limit: 0.2
     - driver: binance
-      market: 'ETHUSDT'
+      market: 'BTCUSDT'
       host: "api.binance.com"
       key: ""
       secret: ""
